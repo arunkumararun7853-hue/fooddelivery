@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Food Delivery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #60b246;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #4a9c35;
+        }
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-link a {
+            color: #60b246;
+            text-decoration: none;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c62828;
+        }
+        .success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4caf50;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>🍔 Sign In</h1>
+        
+        <!-- Error/Success Messages -->
+        <div id="messages"></div>
+        
+        <form action="signin" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="submit-btn">Sign In</button>
+        </form>
+        
+        <div class="form-link">
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+            <p><a href="home">Back to Home</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Show messages based on URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const registered = urlParams.get('registered');
+        const messagesDiv = document.getElementById('messages');
+        
+        if (error === 'invalid') {
+            messagesDiv.innerHTML = '<div class="error">Invalid email or password. Please try again.</div>';
+        } else if (error === 'system') {
+            messagesDiv.innerHTML = '<div class="error">System error occurred. Please try again later.</div>';
+        } else if (error === 'empty') {
+            messagesDiv.innerHTML = '<div class="error">Please fill in both email and password.</div>';
+        }
+        
+        if (registered === 'true') {
+            messagesDiv.innerHTML = '<div class="success">Registration successful! Please sign in with your credentials.</div>';
+        }
+    </script>
+</body>
+</html>
